@@ -29,21 +29,6 @@ function init() {
 init();
 
 
-//4. Display the sample metadata, i.e., an individual's demographic information.
-//Populate the panel with demographics 
-function demographics(id, data) {
-    let metadata = data.metadata;
-    let subjectMetadata = metadata.filter(row => row.id == id)[0];
-    //console.log(subjectMetadata)
-    let panel = d3.select("#sample-metadata");
-    panel.html("")
-    let list =panel.append("ul");
-    Object.entries(subjectMetadata).forEach(([key,value]) => { 
-        panel.append("h5").text(key + ": " + value);
-        });       
-};
-
-
 //2. Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual.
 function barGraph(id, data) {
     let fauna= data.samples;
@@ -91,8 +76,8 @@ function bubble(id, data) {
     yArray = [];
     hoverLabels = [];
 
-    //  **********let sampleLenght = subjectFauna.otu_ids.lenght
-
+    let sampleLength = d3.selectAll(subjectFauna.otu_ids).size();
+    console.log(sampleLength)
     for (el = 0; el < 80 ; el++) {
         xArray.push(subjectFauna.otu_ids[el]);
         yArray.push(subjectFauna.sample_values[el]);
@@ -126,5 +111,21 @@ function bubble(id, data) {
  
    Plotly.newPlot("bubble",  trace2, layout);
 }
+
+
+//4. Display the sample metadata, i.e., an individual's demographic information.
+//Populate the panel with demographics 
+function demographics(id, data) {
+    let metadata = data.metadata;
+    let subjectMetadata = metadata.filter(row => row.id == id)[0];
+    //console.log(subjectMetadata)
+    let panel = d3.select("#sample-metadata");
+    panel.html("")
+    let list =panel.append("ul");
+    Object.entries(subjectMetadata).forEach(([key,value]) => { 
+        panel.append("h5").text(key + ": " + value);
+        });       
+};
+
 
 //5. gauge --optional 
