@@ -8,6 +8,7 @@ A folder called **StaterCode** with the *index.html* code and the subfolder **st
 The folder **Images** with some images provided and the actual output of the challenge
 
 This *Readme* file
+
 ----
 ----
 

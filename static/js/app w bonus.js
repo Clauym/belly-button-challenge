@@ -5,7 +5,7 @@ function optionChanged(id) {
         barGraph(id, data);
         bubble(id, data);
         demographics(id, data); 
-        // gauge(id, data);
+        gauge(id, data);
     });
 }
 
@@ -129,3 +129,31 @@ function demographics(id, data) {
 
 
 //5. gauge --optional 
+function gauge(id, data) {
+    let freq = data.metadata;
+    let subjectFreq = freq.filter(row => row.id == id)[0][6];
+    //let frequency = d3.selectAll(subjectFreq).value();
+   //console.log(frequency)
+    var data = [
+        {
+            domain: { x: [0, 1], y: [0, 1] },
+            value: 3,
+            title: { text: "Frequeny" },
+            type: "indicator",
+            mode: "gauge+number",
+            steps: [
+                {range: [0,1], label: '0-1', color: "lightblue"},
+                {range: [1,2], text: '1-2', color: "blue"},
+                {range: [2,3], text: '2-3', color: 2},
+                {range: [2,4], text: '3-4', color: 3},
+                {range: [4,5], text: '4-5', color: 4},
+                {range: [5,6], text: '5-6', color: 5},
+                {range: [6,7], text: '6-7', color: 6},
+                {range: [7,8], text: '7-8', color: 7}],
+
+        }
+    ];
+   
+    var layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
+    Plotly.newPlot("gauge", data, layout);
+};
